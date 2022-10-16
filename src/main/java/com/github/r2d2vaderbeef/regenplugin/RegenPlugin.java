@@ -12,7 +12,8 @@ public final class RegenPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getLogger().info("RegenPlugin was enabled!");
+        getLogger().info("RegenPlugin was enabled! Ree!");
+        getServer().getPluginManager().registerEvents(this, this);
     }
 
     @Override
@@ -23,6 +24,7 @@ public final class RegenPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onRegen(EntityRegainHealthEvent event) {
         String type = event.getEntityType().toString();
+        getLogger().info("Something is trying to regen! Entity type: " + type);
 
         if (Objects.equals(type, "PLAYER")) {
 
@@ -39,7 +41,7 @@ public final class RegenPlugin extends JavaPlugin implements Listener {
                 } else if (player.isSleeping()) {
                     getLogger().info("Player " + player.getName() + " is sleeping in a bed, allowing regen.");
                 } else {
-                    getLogger().info("Player " + player.getName() + " has a saturation of " + Float.toString(saturation) + " and is not sleeping, cancelling regen.");
+                    getLogger().info("Player " + player.getName() + " has a saturation of " + saturation + " and is not sleeping, cancelling regen.");
                     event.setCancelled(true);
                 }
 
