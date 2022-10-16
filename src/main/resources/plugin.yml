@@ -1,0 +1,6 @@
+name: RegenPlugin
+version: '${version}'
+main: com.github.r2d2vaderbeef.regenplugin.RegenPlugin
+api-version: 1.18
+authors: [ R2D2VaderBeef, Pestotron ]
+description: A custom regen plugin for the Mist SMP.
