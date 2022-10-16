@@ -24,28 +24,23 @@ public final class RegenPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onRegen(EntityRegainHealthEvent event) {
         String type = event.getEntityType().toString();
-        getLogger().info("Something is trying to regen! Entity type: " + type);
-
         if (Objects.equals(type, "PLAYER")) {
-
             HumanEntity player = (HumanEntity) event.getEntity();
             getLogger().info("Player " + player.getName() + " is trying to regen!");
 
             EntityRegainHealthEvent.RegainReason reason = event.getRegainReason();
             if (Objects.equals(reason.toString(), "EATING") || Objects.equals(reason.toString(), "SATIATED")) {
 
-                float saturation = player.getSaturation();
+                float saturation = player.getFoodLevel();
 
                 if (saturation >= 20) {
-                    getLogger().info("Player " + player.getName() + " is fully saturated, allowing regen.");
+                    getLogger().info("Player " + player.getName() + " has full food, allowing regen.");
                 } else if (player.isSleeping()) {
                     getLogger().info("Player " + player.getName() + " is sleeping in a bed, allowing regen.");
                 } else {
-                    getLogger().info("Player " + player.getName() + " has a saturation of " + saturation + " and is not sleeping, cancelling regen.");
+                    getLogger().info("Player " + player.getName() + " has a food level of " + saturation + " and is not sleeping, cancelling regen.");
                     event.setCancelled(true);
                 }
-
-
             }
         }
     }
